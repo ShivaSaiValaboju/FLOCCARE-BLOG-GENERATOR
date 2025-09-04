@@ -1,0 +1,19 @@
+{
+  "name": "floccare-blog-generator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "NODE_ENV=production node server.js",
+    "vercel-build": "echo 'No build step needed'"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "marked": "^12.0.2",
+    "node-fetch": "^3.3.2",
+    "rate-limiter-flexible": "^5.0.0"
+  }
+}

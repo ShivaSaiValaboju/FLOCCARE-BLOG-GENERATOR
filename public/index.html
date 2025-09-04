@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt → Blog | FlocCare Assignment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <script>
+    // Set initial theme from localStorage or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+  <script defer src="/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <header class="container">
+    <h1>Prompt → Blog Generator</h1>
+    <p class="sub">Enter a topic and get a ~1000‑word, well‑formatted blog right on the page.</p>
+    <button class="theme-toggle" onclick="
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    ">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+    </button>
+  </header>
+
+  <main class="container grid">
+  <section class="card left">
+      <h2>Write your brief</h2>
+      <form id="genForm">
+        <label>Topic / Prompt <span class="req">*</span></label>
+        <textarea id="topic" placeholder="e.g., The future of telemedicine in India, challenges and opportunities" required></textarea>
+
+        <div class="row">
+          <div class="col">
+            <label>Tone</label>
+            <select id="tone">
+              <option value="">Default (informative & friendly)</option>
+              <option>Professional</option>
+              <option>Conversational</option>
+              <option>Persuasive</option>
+              <option>Analytical</option>
+              <option>Storytelling</option>
+            </select>
+          </div>
+          <div class="col">
+            <label>Audience</label>
+            <input id="audience" type="text" placeholder="e.g., startup founders, clinicians, students" />
+          </div>
+        </div>
+
+        <label>Optional outline</label>
+        <textarea id="outline" placeholder="Add bullet points or section titles you'd like covered (optional)"></textarea>
+
+        <div class="row">
+          <div class="col">
+            <label>Target length</label>
+            <input id="words" type="number" min="800" max="1400" value="1000" />
+          </div>
+          <div class="col">
+            <label>&nbsp;</label>
+            <button type="submit" class="btn">Generate Blog</button>
+          </div>
+        </div>
+
+        <p id="status" class="status"></p>
+      </form>
+    </section>
+
+  <section class="card">
+      <div class="toolbar">
+        <h2>Blog Output</h2>
+        <div class="actions">
+          <button id="copyBtn" class="btn secondary" disabled>Copy</button>
+          <button id="downloadBtn" class="btn secondary" disabled>Download .md</button>
+        </div>
+      </div>
+      <article id="result" class="prose"></article>
+      <div id="wordCount" class="muted"></div>
+    </section>
+  </main>
+
+  <footer class="container foot">
+    <span>Built for FlocCare – Fullstack Assignment</span>
+    <a href="https://aistudio.google.com/" target="_blank" rel="noreferrer">Uses Google Gemini (free tier)</a>
+  </footer>
+</body>
+</html>
