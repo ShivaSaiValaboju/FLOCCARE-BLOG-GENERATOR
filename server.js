@@ -15,7 +15,7 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
 
-// Simple rate limiter: 30 requests per hour per IP
+// ...existing code...
 const rateLimiter = new RateLimiterMemory({
   points: 30,
   duration: 60 * 60,
@@ -30,7 +30,7 @@ app.use(async (req, res, next) => {
   }
 });
 
-// Serve static files
+// ...existing code...
 app.use(express.static(path.join(__dirname, "public")));
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -65,7 +65,7 @@ app.post("/api/generate", async (req, res) => {
       return res.status(400).json({ error: "Please provide a valid topic/prompt (min 3 characters)." });
     }
 
-    const targetWords = Math.max(800, Math.min(1400, Number(words) || 1000)); // clamp 800–1400
+  const targetWords = Math.max(800, Math.min(1400, Number(words) || 1000));
 
     const prompt = buildPrompt({ topic, tone, audience, outline, words: targetWords });
 
@@ -108,7 +108,7 @@ app.post("/api/generate", async (req, res) => {
   }
 });
 
-// Fallback to index.html for root
+// ...existing code...
 app.get("*", (_req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });

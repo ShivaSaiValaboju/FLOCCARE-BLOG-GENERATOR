@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    const targetWords = Math.max(800, Math.min(1400, Number(words) || 1000));
+  const targetWords = Math.max(800, Math.min(1400, Number(words) || 1000));
     const prompt = buildPrompt({ topic, tone, audience, outline, words: targetWords });
     const url = `${GEMINI_URL}?key=${encodeURIComponent(GEMINI_API_KEY || "")}`;
     const body = {

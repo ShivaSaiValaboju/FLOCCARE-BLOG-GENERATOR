@@ -49,7 +49,7 @@ form.addEventListener("submit", async (e) => {
     }
 
     lastMarkdown = (data.markdown || "").trim();
-    // Render Markdown to HTML using marked (loaded from CDN in index.html)
+  resultEl.innerHTML = marked.parse(lastMarkdown);
     resultEl.innerHTML = marked.parse(lastMarkdown);
     const wc = countWords(lastMarkdown);
     wordCountEl.textContent = `Word count (approx.): ${wc}`;
